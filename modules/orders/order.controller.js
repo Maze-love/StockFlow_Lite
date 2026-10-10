@@ -56,3 +56,55 @@ export async function getOrderById(req, res, next) {
     next(err);
   }
 }
+//
+export async function reserveOrder(req, res, next) {
+  try {
+    const result = await orderService.reserveOrder(
+      req.organizationId,
+      req.user.id,
+      req.params.orderId
+    );
+    res.status(200).json({ success: true, data: result });
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function confirmOrder(req, res, next) {
+  try {
+    const result = await orderService.confirmOrder(
+      req.organizationId,
+      req.user.id,
+      req.params.orderId
+    );
+    res.status(200).json({ success: true, data: result });
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function fulfillOrder(req, res, next) {
+  try {
+    const result = await orderService.fulfillOrder(
+      req.organizationId,
+      req.user.id,
+      req.params.orderId
+    );
+    res.status(200).json({ success: true, data: result });
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function cancelOrder(req, res, next) {
+  try {
+    const result = await orderService.cancelOrder(
+      req.organizationId,
+      req.user.id,
+      req.params.orderId
+    );
+    res.status(200).json({ success: true, data: result });
+  } catch (err) {
+    next(err);
+  }
+}

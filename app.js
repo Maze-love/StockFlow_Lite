@@ -11,6 +11,7 @@ import warehouseRoutes from "./modules/warehouses/warehouse.routes.js";
 import customerRoutes from "./modules/customers/customer.routes.js";
 import inventoryRoutes from "./modules/inventory/inventory.routes.js";
 import orderRoutes from "./modules/orders/order.routes.js";
+import auditRoutes from "./modules/audit/audit.routes.js";
 
 const app = express();
 
@@ -43,6 +44,7 @@ app.use("/api/v1/organizations/:organizationId/warehouses", warehouseRoutes);
 app.use("/api/v1/organizations/:organizationId/customers", customerRoutes);
 app.use("/api/v1/organizations/:organizationId/inventory", inventoryRoutes);
 app.use("/api/v1/organizations/:organizationId/orders", orderRoutes);
+app.use("/api/v1/organizations/:organizationId/audit-logs", auditRoutes);
 
 // Central Error Handling
 app.use(errorHandler);

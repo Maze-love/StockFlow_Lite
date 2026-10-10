@@ -38,6 +38,7 @@ export default (requiredRole) => {
       }
 
       const userRole = rows[0].role;
+      // if current user role is less than the specified, the user will be forbidden
       if (ROLE_HIERARCHY[userRole] < ROLE_HIERARCHY[requiredRole]) {
         return res.status(403).json({
           success: false,

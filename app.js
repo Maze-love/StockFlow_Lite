@@ -4,8 +4,13 @@ import cors from "cors";
 import rateLimit from "express-rate-limit";
 
 import authRoutes from "./modules/auth/auth.routes.js";
-import orgRoutes from "./modules/organizations/org.routes.js";
+import orgRoutes from "./modules/organizations/org.route.js";
 import errorHandler from "./middleware/errorHandler.js";
+import productRoutes from "./modules/products/product.routes.js";
+import warehouseRoutes from "./modules/warehouses/warehouse.routes.js";
+import customerRoutes from "./modules/customers/customer.routes.js";
+import inventoryRoutes from "./modules/inventory/inventory.routes.js";
+import orderRoutes from "./modules/orders/order.routes.js";
 
 const app = express();
 
@@ -31,6 +36,13 @@ app.get("/health", async (req, res) => {
 // Route Modules
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/organizations", orgRoutes);
+
+// Mount Organization Nested Sub-Routes
+app.use("/api/v1/organizations/:organizationId/products", productRoutes);
+app.use("/api/v1/organizations/:organizationId/warehouses", warehouseRoutes);
+app.use("/api/v1/organizations/:organizationId/customers", customerRoutes);
+app.use("/api/v1/organizations/:organizationId/inventory", inventoryRoutes);
+app.use("/api/v1/organizations/:organizationId/orders", orderRoutes);
 
 // Central Error Handling
 app.use(errorHandler);

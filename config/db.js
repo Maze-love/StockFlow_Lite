@@ -1,5 +1,6 @@
 import { Pool } from "pg";
 import dotnet from "dotenv";
+
 dotnet.config();
 
 const db = new Pool({
@@ -11,14 +12,7 @@ const db = new Pool({
   max: 10,
 });
 
-db.on("connect", () => {
-  console.log("db connected");
-});
-
-db.on("error", () => {
-  console.log("db connection error");
-});
-
 export default {
   query: (text, params) => db.query(text, params),
+  getClient: () => db.connect(),
 };

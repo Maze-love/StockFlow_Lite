@@ -12,22 +12,14 @@ import customerRoutes from "./modules/customers/customer.routes.js";
 import inventoryRoutes from "./modules/inventory/inventory.routes.js";
 import orderRoutes from "./modules/orders/order.routes.js";
 import auditRoutes from "./modules/audit/audit.routes.js";
-
+import { apiLimiter } from "./middleware/rateLimiter.js";
 const app = express();
 
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-  message: {
-    success: false,
-    error: { code: "RATE_LIMIT_EXCEEDED", message: "Too many requests." },
-  },
-});
-app.use(limiter);
+app.use("/api/", apiLimiter);
 
 // System Health Endpoint
 app.get("/health", async (req, res) => {

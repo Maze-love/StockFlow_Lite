@@ -11,14 +11,7 @@ export async function createProduct(orgId, { sku, name, price, status }) {
 
 export async function getProducts(
   orgId,
-  {
-    page = 1,
-    limit = 10,
-    search,
-    status,
-    sortBy = "created_at",
-    order = "DESC",
-  }
+  { page = 1, limit = 3, search, status, sortBy = "created_at", order = "DESC" }
 ) {
   const offset = (page - 1) * limit;
   const params = [orgId];
